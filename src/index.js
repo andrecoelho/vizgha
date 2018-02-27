@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ApplicationNode from './ApplicationNode'
 import { unregister } from './services/registerServiceWorker'
-import store from './services/store'
+import store from './store'
 
 let initialState = {}
 
