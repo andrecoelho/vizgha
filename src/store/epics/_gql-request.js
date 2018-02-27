@@ -7,7 +7,7 @@ import 'rxjs/add/operator/ignoreElements'
 
 const GRAPHQL_URL = 'https://api.github.com/graphql'
 
-export default (token, body) =>
+export default (token, query) =>
   Observable.ajax({
     url: GRAPHQL_URL,
     method: 'POST',
@@ -15,5 +15,5 @@ export default (token, body) =>
       'Content-Type': 'application/json',
       Authorization: token
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify({ query: `query { ${query} }` })
   })
