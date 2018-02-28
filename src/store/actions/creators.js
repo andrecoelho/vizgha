@@ -1,11 +1,16 @@
-import { ADD_REPOS, ADD_COMMITS } from 'store/actions/types'
+import { ADD_TOKEN, ADD_REPOS, ADD_COMMITS } from './types'
+
+export const addToken = token => ({
+  type: ADD_TOKEN,
+  token
+})
 
 export const addRepos = repos => ({
   type: ADD_REPOS,
-  payload: repos
+  repos
 })
 
 export const addCommits = commits => ({
   type: ADD_COMMITS,
-  payload: commits
+  commits
 })

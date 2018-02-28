@@ -1,4 +1,4 @@
-.landing {
+.main {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,22 +19,4 @@
   bottom: 0;
   background-color: black;
   opacity: 0.6;
-}
-
-.ghpt {
-  width: 400px;
-  padding: 20px;
-}
-
-.ghptText {
-  text-align: center;
-  padding: 0 0 10px 0 !important;
-}
-
-.ghptInput {
-  margin-bottom: 10px;
-
-  input {
-    text-align: center;
-  }
 }

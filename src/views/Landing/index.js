@@ -1,21 +1,26 @@
 import React from 'react'
-import { Card, CardText } from 'material-ui/Card'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import TokenForm from 'components/TokenForm'
+import { addToken } from 'store/actions/creators'
 
-import styles from './landing.scss'
+import './landing.scss'
 
-const Landing = props => (
-  <div styleName='landing'>
+const Landing = ({ onAddToken }) => (
+  <div styleName='main'>
     <div styleName='backdrop' />
-    <Card className={styles.ghpt}>
-      <CardText className={styles.ghptText}>
-        Please enter a <i>GitHub Personal Token</i> below. It will be used to authenticate requests to the GitHub API.
-      </CardText>
-      <TextField fullWidth className={styles.ghptInput} />
-      <RaisedButton label='Start' primary fullWidth />
-    </Card>
+    <TokenForm onAddToken={onAddToken} />
   </div>
 )
 
-export default Landing
+Landing.propTypes = {
+  onAddToken: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = dispatch => ({
+  onAddToken (token) {
+    dispatch(addToken(token))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(Landing)
