@@ -8,11 +8,14 @@ import history from 'services/history'
 import DevTools from 'components/DevTools'
 import Landing from './Landing'
 
+import './app.scss'
+
 const App = ({ store }) => (
   <Provider store={store}>
-    <div>
+    <div styleName='main'>
       {process.env.NODE_ENV !== 'production' && <DevTools />}
 
+      <div styleName='backdrop' />
       <MuiThemeProvider>
         <Router history={history}>
           <Switch>

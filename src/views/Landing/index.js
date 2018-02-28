@@ -8,7 +8,6 @@ import './landing.scss'
 
 const Landing = ({ onAddToken }) => (
   <div styleName='main'>
-    <div styleName='backdrop' />
     <TokenForm onAddToken={onAddToken} />
   </div>
 )
@@ -17,9 +16,10 @@ Landing.propTypes = {
   onAddToken: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   onAddToken (token) {
     dispatch(addToken(token))
+    ownProps.history.push('/repos')
   }
 })
 
