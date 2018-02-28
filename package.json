@@ -6,6 +6,7 @@
     "cc-react-scripts": "1.5.1",
     "classnames": "2.2.5",
     "lodash": "4.17.4",
+    "material-ui": "0.20.0",
     "moment": "2.19.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
