@@ -1,0 +1,33 @@
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.repos {
+  width: calc(100% - 150px);
+  height: calc(100% - 150px);
+  max-width: 800px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px;
+}
+
+.titleText {
+  padding: 0 !important;
+}
+
+.changeToken {
+  text-decoration: none;
+  color: inherit;
+  padding: 5px;
+}

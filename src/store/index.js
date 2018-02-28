@@ -17,7 +17,7 @@ const configureStore = (initialState = {}) => {
   const middleware = [createEpicMiddleware(rootEpic)]
 
   if (process.env.NODE_ENV !== 'production') {
-    middleware.shift(
+    middleware.push(
       createLogger({
         collapsed: true,
         logger: console,

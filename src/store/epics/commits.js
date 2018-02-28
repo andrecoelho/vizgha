@@ -4,7 +4,7 @@ import gqlRequest from './_gql-request'
 import { API_COMMITS } from '../actions/types'
 import { addCommits } from '../actions/creators'
 
-const commitsQuery = (userName, repoName) => `{
+const commitsQuery = (userName, repoName) => `
   repository(owner: "${userName}", name: "${repoName}") {
     defaultBranchRef {
       target {
@@ -26,8 +26,7 @@ const commitsQuery = (userName, repoName) => `{
         }
       }
     }
-  }
-}`
+  }`
 
 const extractCommitsInfo = _.compose(
   addCommits,
@@ -40,7 +39,7 @@ const commits = (actionStream, state) =>
     .switchMap(action =>
       gqlRequest(
         state.token,
-        commitsQuery(action.payload.userName, action.payload.repoName)
+        commitsQuery(action.userName, action.repoName)
       ).map(extractCommitsInfo)
     )
 

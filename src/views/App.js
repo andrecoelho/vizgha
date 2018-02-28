@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import history from 'services/history'
 import DevTools from 'components/DevTools'
 import Landing from './Landing'
+import Repos from './Repos'
 
 import './app.scss'
 
@@ -20,6 +21,7 @@ const App = ({ store }) => (
         <Router history={history}>
           <Switch>
             <Route exact path='/' component={Landing} />
+            <Route exact path='/repos' component={Repos} />
           </Switch>
         </Router>
       </MuiThemeProvider>

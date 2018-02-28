@@ -13,7 +13,9 @@ export default (token, query) =>
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token
+      Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ query: `query { ${query} }` })
+    body: JSON.stringify({
+      query: `query { ${query.replace(/\s*\r?\n\s*/g, ' ')} }`
+    })
   })
