@@ -1,0 +1,40 @@
+.landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/assets/schilthorn-3033448_1920.jpg');
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.6;
+}
+
+.ghpt {
+  width: 400px;
+  padding: 20px;
+}
+
+.ghptText {
+  text-align: center;
+  padding: 0 0 10px 0 !important;
+}
+
+.ghptInput {
+  margin-bottom: 10px;
+
+  input {
+    text-align: center;
+  }
+}
