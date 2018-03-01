@@ -17,11 +17,12 @@ class Repos extends Component {
     super(props)
 
     this.state = {
-      userName: ''
+      userName: this.props.userName
     }
 
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.changeToken = this.changeToken.bind(this)
   }
 
   onClick () {
@@ -64,7 +65,11 @@ class Repos extends Component {
             onChange={this.onChange}
           />
 
-          <RaisedButton primary onClick={this.onClick}>
+          <RaisedButton
+            primary
+            className={styles.showRepos}
+            onClick={this.onClick}
+          >
             Show Repos
           </RaisedButton>
 
@@ -83,6 +88,7 @@ class Repos extends Component {
 }
 
 Repos.propTypes = {
+  userName: PropTypes.string.isRequired,
   repos: PropTypes.array,
   apiRepos: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
@@ -90,6 +96,7 @@ Repos.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  userName: state.userName,
   repos: state.repos
 })
 
