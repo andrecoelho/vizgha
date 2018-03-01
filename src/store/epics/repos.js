@@ -36,8 +36,12 @@ const reposQuery = userName => `
 const extractRepoInformation = _.compose(
   addRepos,
   _.sortBy(_.path('name')),
-  _.map(_.path('node')),
-  _.map(_.pick(['node.id', 'node.name'])),
+  _.map(repo => ({
+    ..._.omit(['stargazers', 'issues', 'languages'], _.path('node', repo)),
+    starCount: _.path('node.stargazers.totalCount', repo),
+    issueCount: _.path('node.issues.totalCount', repo),
+    languages: _.sortBy(_.identity, _.map(_.path('node.name'), _.path('node.languages.edges', repo)))
+  })),
   _.path('response.data.user.repositories.edges')
 )
 

@@ -1,91 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Card, CardTitle } from 'material-ui/Card'
-import Divider from 'material-ui/Divider'
-import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField/TextField'
-import { List, ListItem } from 'material-ui/List'
-
+import ReposCard from 'components/ReposCard'
 import { apiRepos } from 'store/actions/creators'
 
-import styles from './repos.scss'
+import './repos.scss'
 
-class Repos extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      userName: this.props.userName
-    }
-
-    this.onClick = this.onClick.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.changeToken = this.changeToken.bind(this)
-  }
-
-  onClick () {
-    this.props.apiRepos(this.state.userName)
-  }
-
-  onChange (event) {
-    this.setState({
-      userName: event.currentTarget.value
-    })
-  }
-
-  changeToken () {
-    this.props.history.push(`/${this.props.location.search}`)
-  }
-
-  render () {
-    return (
-      <div styleName='main'>
-        <Card className={styles.repos}>
-          <div styleName='title'>
-            <CardTitle className={styles.titleText}>
-              Repositories List
-            </CardTitle>
-
-            <RaisedButton
-              className={styles.changeToken}
-              onClick={this.changeToken}
-            >
-              Change Token
-            </RaisedButton>
-          </div>
-
-          <Divider />
-
-          <TextField
-            id='githubUserName'
-            hintText='GitHub User Name'
-            value={this.state.userName}
-            onChange={this.onChange}
-          />
-
-          <RaisedButton
-            primary
-            className={styles.showRepos}
-            onClick={this.onClick}
-          >
-            Show Repos
-          </RaisedButton>
-
-          <Divider />
-
-          <List>
-            {this.props.repos &&
-              this.props.repos.map(repo => (
-                <ListItem key={repo.id}>{repo.name}</ListItem>
-              ))}
-          </List>
-        </Card>
-      </div>
-    )
-  }
-}
+const Repos = props => (
+  <div styleName='main'>
+    <ReposCard {...props} />
+  </div>
+)
 
 Repos.propTypes = {
   userName: PropTypes.string.isRequired,

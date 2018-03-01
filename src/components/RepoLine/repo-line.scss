@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+}
+
+.text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  line-height: 1.2em;
+  color: darkgray;
+  margin: 10px 0;
+}
+
+.badges {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
