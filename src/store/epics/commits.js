@@ -1,5 +1,9 @@
+import { Observable } from 'rxjs/Observable'
 import _ from 'lodash/fp'
 import gqlRequest from './_gql-request'
+
+import 'rxjs/add/observable/empty'
+import 'rxjs/add/operator/catch'
 
 import { API_COMMITS } from '../actions/types'
 import { addCommits } from '../actions/creators'
@@ -34,13 +38,10 @@ const extractCommitsInfo = _.compose(
 )
 
 const commits = (actionStream, state) =>
-  actionStream
-    .ofType(API_COMMITS)
-    .switchMap(action =>
-      gqlRequest(
-        state.token,
-        commitsQuery(action.userName, action.repoName)
-      ).map(extractCommitsInfo)
-    )
+  actionStream.ofType(API_COMMITS).switchMap(action =>
+    gqlRequest(state.token, commitsQuery(action.userName, action.repoName))
+      .map(extractCommitsInfo)
+      .catch(() => Observable.empty())
+  )
 
 export default commits

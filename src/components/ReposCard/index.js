@@ -80,7 +80,7 @@ class ReposCard extends Component {
               primary
               className={styles.showReposButton}
               onClick={this.onClick}
-              label='Show Repos'
+              label='Show'
             />
           </div>
 
