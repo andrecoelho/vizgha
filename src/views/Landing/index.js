@@ -19,7 +19,7 @@ Landing.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onAddToken (token) {
     dispatch(addToken(token))
-    ownProps.history.push('/repos')
+    ownProps.history.push(`/repos${ownProps.location.search}`)
   }
 })
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import { Card, CardTitle } from 'material-ui/Card'
 import Divider from 'material-ui/Divider'
@@ -35,6 +34,10 @@ class Repos extends Component {
     })
   }
 
+  changeToken () {
+    this.props.history.push(`/${this.props.location.search}`)
+  }
+
   render () {
     return (
       <div styleName='main'>
@@ -43,10 +46,12 @@ class Repos extends Component {
             <CardTitle className={styles.titleText}>
               Repositories List
             </CardTitle>
-            <RaisedButton>
-              <Link to='/' className={styles.changeToken}>
-                Change Token
-              </Link>
+
+            <RaisedButton
+              className={styles.changeToken}
+              onClick={this.changeToken}
+            >
+              Change Token
             </RaisedButton>
           </div>
 
@@ -78,8 +83,10 @@ class Repos extends Component {
 }
 
 Repos.propTypes = {
+  repos: PropTypes.array,
   apiRepos: PropTypes.func.isRequired,
-  repos: PropTypes.array
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

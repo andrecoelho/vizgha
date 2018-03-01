@@ -26,8 +26,10 @@
   padding: 0 !important;
 }
 
-.changeToken {
-  text-decoration: none;
-  color: inherit;
-  padding: 5px;
+.changeToken > button > div > div {
+  padding: 0 10px;
+}
+
+.showRepos > button > div > div {
+  padding: 0 10px;
 }
