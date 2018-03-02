@@ -6,29 +6,28 @@ import './commits-card.scss'
 
 const Histogram = ({ commits }) => {
   const maxAddition = _.prop('additions', _.maxBy('additions', commits))
-
   const maxDeletion = _.prop('deletions', _.maxBy('deletions', commits))
+  const max = Math.max(maxDeletion, maxAddition)
 
   return (
-    <div styleName='histogram' data-max-addition={maxAddition}>
+    <div styleName='histogram'>
       {commits.map(commit => (
         <div key={commit.oid} styleName='commit'>
           <div
             styleName='deletions'
             style={{
               width: `${Math.min(
-                Math.ceil(commit.deletions / maxDeletion * 50),
-                100
+                Math.ceil((commit.deletions / max) * 50),
+                50
               )}%`
             }}
-            data-addition={commit.additions}
           />
           <div
             styleName='additions'
             style={{
               width: `${Math.min(
-                Math.ceil(commit.additions / maxAddition * 50),
-                100
+                Math.ceil((commit.additions / max) * 50),
+                50
               )}%`
             }}
           />
