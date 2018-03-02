@@ -32,10 +32,8 @@ class CommitsCard extends Component {
   }
 
   render () {
-    const hasCommits =
-      this.props.isCommitsLoaded && this.props.commits.length > 0
-
-    const noCommits = this.props.isCommitsLoaded && this.props.commits.length === 0
+    const noCommits =
+      this.props.isCommitsLoaded && this.props.commits.length === 0
 
     return (
       <Card className={styles.main}>
@@ -56,8 +54,10 @@ class CommitsCard extends Component {
             </IconButton>
           </div>
 
-          {hasCommits && <Histogram commits={this.props.commits} />}
-          {noCommits && <div styleName='empty'>This repo does not have any commits.</div>}
+          {!noCommits && <Histogram commits={this.props.commits} />}
+          {noCommits && (
+            <div styleName='empty'>This repo does not have any commits.</div>
+          )}
         </div>
       </Card>
     )

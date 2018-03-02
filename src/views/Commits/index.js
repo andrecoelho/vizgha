@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
   const repo = _.find(repo => repo.name === ownProps.match.params.name, state.repos)
 
   return {
-    isCommitsLoaded: repo.hasOwnProperty('commits'),
+    isCommitsLoaded: _.has('commits', repo),
     commits: _.propOr(
       [],
       'commits',

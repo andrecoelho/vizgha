@@ -5,15 +5,17 @@ import _ from 'lodash/fp'
 import './commits-card.scss'
 
 const Histogram = ({ commits }) => {
-  const maxAddition = _.prop(
-    'additions',
-    _.maxBy('additions', commits)
-  )
+  if (commits.length === 0) {
+    return (
+      <div styleName='empty'>
+        <img src='/assets/loading.svg' />
+      </div>
+    )
+  }
 
-  const maxDeletion = _.prop(
-    'deletions',
-    _.maxBy('deletions', commits)
-  )
+  const maxAddition = _.prop('additions', _.maxBy('additions', commits))
+
+  const maxDeletion = _.prop('deletions', _.maxBy('deletions', commits))
 
   return (
     <div styleName='histogram' data-max-addition={maxAddition}>
