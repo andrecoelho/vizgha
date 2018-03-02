@@ -34,12 +34,18 @@ const commitsQuery = (userName, repoName) => `
 
 const extractCommitsInfo = _.compose(
   addCommits,
-  _.path('data.repository.defaultBranchRef.target.history.nodes')
+  _.map(commit =>
+    _.merge({ author: _.path('author.name', commit) }, _.omit('author', commit))
+  ),
+  _.path('response.data.repository.defaultBranchRef.target.history.nodes')
 )
 
-const commits = (actionStream, state) =>
+const commits = (actionStream, store) =>
   actionStream.ofType(API_COMMITS).switchMap(action =>
-    gqlRequest(state.token, commitsQuery(action.userName, action.repoName))
+    gqlRequest(
+      store.getState().token,
+      commitsQuery(action.userName, action.repoName)
+    )
       .map(extractCommitsInfo)
       .catch(() => Observable.empty())
   )

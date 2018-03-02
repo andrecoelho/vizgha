@@ -1,0 +1,17 @@
+.main {
+  width: calc(100% - 150px);
+  height: calc(100% - 150px);
+  max-width: 800px;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

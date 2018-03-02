@@ -22,8 +22,8 @@ import {
 
 import './repo-line.scss'
 
-const RepoLine = ({ repo }) => (
-  <ListItem secondaryTextLines={2}>
+const RepoLine = ({ repo, showCommits }) => (
+  <ListItem secondaryTextLines={2} onClick={() => showCommits(repo.name)}>
     <div styleName='main'>
 
       <div styleName='text'>
@@ -64,7 +64,8 @@ const RepoLine = ({ repo }) => (
 )
 
 RepoLine.propTypes = {
-  repo: PropTypes.object.isRequired
+  repo: PropTypes.object.isRequired,
+  showCommits: PropTypes.func
 }
 
 export default RepoLine

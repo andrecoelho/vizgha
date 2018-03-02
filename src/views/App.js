@@ -8,6 +8,7 @@ import history from 'services/history'
 import DevTools from 'components/DevTools'
 import Landing from './Landing'
 import Repos from './Repos'
+import Commits from './Commits'
 
 import './app.scss'
 
@@ -22,6 +23,7 @@ const App = ({ store }) => (
           <Switch>
             <Route exact path='/' component={Landing} />
             <Route exact path='/repos' component={Repos} />
+            <Route exact path='/repos/:name/commits' component={Commits} />
           </Switch>
         </Router>
       </MuiThemeProvider>

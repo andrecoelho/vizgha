@@ -25,6 +25,7 @@ class ReposCard extends Component {
     this.onChange = this.onChange.bind(this)
     this.onKeyPress = this.onKeyPress.bind(this)
     this.changeToken = this.changeToken.bind(this)
+    this.showCommits = this.showCommits.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -53,12 +54,17 @@ class ReposCard extends Component {
     this.props.history.push(`/${this.props.location.search}`)
   }
 
+  showCommits (repoName) {
+    this.props.history.push(`/repos/${repoName}/commits${this.props.location.search}`)
+    this.props.apiCommits(this.state.userName, repoName)
+  }
+
   render () {
     return (
       <Card className={styles.main}>
         <div styleName='content'>
           <div styleName='title'>
-            <CardTitle title='User Repositories List' />
+            <CardTitle title='Repositories' />
 
             <IconButton tooltip='Change Token' onClick={this.changeToken}>
               <SvgToken />
@@ -87,9 +93,9 @@ class ReposCard extends Component {
           <List className={styles.list}>
             {this.props.repos &&
               this.props.repos.map((repo, index) => (
-                <div key={repo.id}>
+                <div key={repo.name}>
                   {index > 0 && <Divider />}
-                  <RepoLine repo={repo} />
+                  <RepoLine repo={repo} showCommits={this.showCommits} />
                 </div>
               ))}
           </List>
@@ -103,6 +109,7 @@ ReposCard.propTypes = {
   userName: PropTypes.string.isRequired,
   repos: PropTypes.array,
   apiRepos: PropTypes.func.isRequired,
+  apiCommits: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
