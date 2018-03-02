@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash/fp'
 
 import { Card, CardTitle } from 'material-ui/Card'
 import IconButton from 'material-ui/IconButton'
@@ -18,7 +19,7 @@ class CommitsCard extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.isCommitsLoaded) {
+    if (!_.has('commits', this.props.repo)) {
       this.props.apiCommits(this.props.match.params.name)
     }
   }
@@ -32,8 +33,8 @@ class CommitsCard extends Component {
   }
 
   render () {
-    const noCommits =
-      this.props.isCommitsLoaded && this.props.commits.length === 0
+    const isCommitsLoaded = _.has('commits', this.props.repo)
+    const noCommits = isCommitsLoaded && this.props.repo.commits.length === 0
 
     return (
       <Card className={styles.main}>
@@ -49,7 +50,7 @@ class CommitsCard extends Component {
 
             <CardTitle
               title='Commits'
-              subtitle={this.props.match.params.name}
+              subtitle={`${this.props.repo.name}:master`}
               className={styles.titleText}
             />
 
@@ -58,16 +59,16 @@ class CommitsCard extends Component {
             </IconButton>
           </div>
 
-          {!noCommits &&
+          {!isCommitsLoaded &&
             this.props.commitsLoading && (
             <div styleName='empty'>
               <img src='/assets/loading.svg' />
             </div>
           )}
 
-          {!noCommits &&
+          {isCommitsLoaded &&
             !this.props.commitsLoading && (
-            <Histogram commits={this.props.commits} />
+            <Histogram commits={this.props.repo.commits} />
           )}
 
           {noCommits && (
@@ -81,8 +82,7 @@ class CommitsCard extends Component {
 
 CommitsCard.propTypes = {
   apiCommits: PropTypes.func.isRequired,
-  isCommitsLoaded: PropTypes.bool.isRequired,
-  commits: PropTypes.array.isRequired,
+  repo: PropTypes.object.isRequired,
   commitsLoading: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
