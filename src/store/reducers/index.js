@@ -7,15 +7,28 @@ const token = (state = '', action) =>
 const userName = (state = '', action) =>
   action.type === API_REPOS ? action.userName : state
 
-const repos = (state = [], action) =>
-  action.type === ADD_REPOS ? action.repos : state
-
-const commits = (state = [], action) =>
-  action.type === ADD_COMMITS ? action.commits : state
+const repos = (state = [], action) => {
+  switch (action.type) {
+    case ADD_REPOS:
+      return action.repos
+    case ADD_COMMITS:
+      if (state.length > 0) {
+        return state.map(
+          repo =>
+            action.repoName === repo.name
+              ? { ...repo, commits: action.commits }
+              : repo
+        )
+      } else {
+        return state
+      }
+    default:
+      return state
+  }
+}
 
 export default combineReducers({
   token,
   userName,
-  repos,
-  commits
+  repos
 })

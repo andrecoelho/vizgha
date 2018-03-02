@@ -21,13 +21,13 @@ export const addRepos = repos => ({
   repos
 })
 
-export const apiCommits = (userName, repoName) => ({
+export const apiCommits = (repoName) => ({
   type: API_COMMITS,
-  userName,
   repoName
 })
 
-export const addCommits = commits => ({
+export const addCommits = (repoName, commits) => ({
   type: ADD_COMMITS,
+  repoName,
   commits
 })
