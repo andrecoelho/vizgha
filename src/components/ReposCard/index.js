@@ -55,8 +55,9 @@ class ReposCard extends Component {
   }
 
   showCommits (repoName) {
-    this.props.history.push(`/repos/${repoName}/commits${this.props.location.search}`)
-    this.props.apiCommits(this.state.userName, repoName)
+    this.props.history.push(
+      `/repos/${repoName}/commits${this.props.location.search}`
+    )
   }
 
   render () {
@@ -109,7 +110,6 @@ ReposCard.propTypes = {
   userName: PropTypes.string.isRequired,
   repos: PropTypes.array,
   apiRepos: PropTypes.func.isRequired,
-  apiCommits: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }

@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import ReposCard from 'components/ReposCard'
-import { apiRepos, apiCommits } from 'store/actions/creators'
-
+import { apiRepos } from 'store/actions/creators'
 import './repos.scss'
 
 const Repos = props => (
@@ -20,9 +19,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   apiRepos (userName) {
     dispatch(apiRepos(userName))
-  },
-  apiCommits (userName, repoName) {
-    dispatch(apiCommits(userName, repoName))
   }
 })
 
