@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import SvgBack from 'material-ui/svg-icons/image/navigate-before'
 import SvgToken from 'material-ui/svg-icons/communication/vpn-key'
 
+import Histogram from './histogram'
 import styles from './commits-card.scss'
 
 class CommitsCard extends Component {
@@ -17,7 +18,7 @@ class CommitsCard extends Component {
   }
 
   componentWillMount () {
-    if (this.props.commits.length === 0) {
+    if (!this.props.isCommitsLoaded) {
       this.props.apiCommits(this.props.match.params.name)
     }
   }
@@ -31,6 +32,11 @@ class CommitsCard extends Component {
   }
 
   render () {
+    const hasCommits =
+      this.props.isCommitsLoaded && this.props.commits.length > 0
+
+    const noCommits = this.props.isCommitsLoaded && this.props.commits.length === 0
+
     return (
       <Card className={styles.main}>
         <div styleName='content'>
@@ -50,11 +56,8 @@ class CommitsCard extends Component {
             </IconButton>
           </div>
 
-          <div styleName='histogram'>
-            {this.props.commits.map(commit => (
-              <div key={commit.oid}>{commit.message}</div>
-            ))}
-          </div>
+          {hasCommits && <Histogram commits={this.props.commits} />}
+          {noCommits && <div styleName='empty'>This repo does not have any commits.</div>}
         </div>
       </Card>
     )
@@ -63,6 +66,7 @@ class CommitsCard extends Component {
 
 CommitsCard.propTypes = {
   apiCommits: PropTypes.func.isRequired,
+  isCommitsLoaded: PropTypes.bool.isRequired,
   commits: PropTypes.array.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,

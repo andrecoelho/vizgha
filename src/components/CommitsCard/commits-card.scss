@@ -21,13 +21,42 @@
   text-align: center;
 }
 
-.histogram {
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.histogram, .empty {
   position: absolute;
-  top: 140px;
+  top: 85px;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 !important;
+  padding: 20px !important;
   overflow-y: auto;
   z-index: -1;
+}
+
+.commit {
+  text-align: center;
+  height: 5px;
+  position: relative;
+  margin-bottom: 1px;
+
+  > * {
+    height: 100%;
+  }
+
+  .deletions {
+    position: absolute;
+    right: 50%;
+    background-color: #C62828;
+  }
+
+  .additions {
+    position: absolute;
+    left: 50%;
+    background-color: #558B2F;
+  }
 }
