@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     isCommitsLoaded: _.has('commits', repo),
+    commitsLoading: state.commitsLoading,
     commits: _.propOr(
       [],
       'commits',

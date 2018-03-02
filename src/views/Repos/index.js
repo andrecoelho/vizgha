@@ -13,7 +13,8 @@ const Repos = props => (
 
 const mapStateToProps = state => ({
   userName: state.userName,
-  repos: state.repos
+  repos: state.repos,
+  reposLoading: state.reposLoading
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

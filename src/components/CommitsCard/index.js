@@ -39,8 +39,12 @@ class CommitsCard extends Component {
       <Card className={styles.main}>
         <div styleName='content'>
           <div styleName='title'>
-            <IconButton tooltip='Repositories' onClick={this.showRepositories}>
-              <SvgBack />
+            <IconButton
+              tooltip='Repositories'
+              onClick={this.showRepositories}
+              style={{ padding: 0 }}
+            >
+              <SvgBack style={{ marginTop: 3 }} />
             </IconButton>
 
             <CardTitle
@@ -54,7 +58,18 @@ class CommitsCard extends Component {
             </IconButton>
           </div>
 
-          {!noCommits && <Histogram commits={this.props.commits} />}
+          {!noCommits &&
+            this.props.commitsLoading && (
+            <div styleName='empty'>
+              <img src='/assets/loading.svg' />
+            </div>
+          )}
+
+          {!noCommits &&
+            !this.props.commitsLoading && (
+            <Histogram commits={this.props.commits} />
+          )}
+
           {noCommits && (
             <div styleName='empty'>This repo does not have any commits.</div>
           )}
@@ -68,6 +83,7 @@ CommitsCard.propTypes = {
   apiCommits: PropTypes.func.isRequired,
   isCommitsLoaded: PropTypes.bool.isRequired,
   commits: PropTypes.array.isRequired,
+  commitsLoading: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired

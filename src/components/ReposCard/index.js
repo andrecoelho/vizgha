@@ -91,15 +91,23 @@ class ReposCard extends Component {
             />
           </div>
 
-          <List className={styles.list}>
-            {this.props.repos &&
-              this.props.repos.map((repo, index) => (
-                <div key={repo.name}>
-                  {index > 0 && <Divider />}
-                  <RepoLine repo={repo} showCommits={this.showCommits} />
-                </div>
-              ))}
-          </List>
+          {this.props.reposLoading && (
+            <div styleName='list loading'>
+              <img src='/assets/loading.svg' />
+            </div>
+          )}
+
+          {!this.props.reposLoading && (
+            <List className={styles.list}>
+              {this.props.repos &&
+                this.props.repos.map((repo, index) => (
+                  <div key={repo.name}>
+                    {index > 0 && <Divider />}
+                    <RepoLine repo={repo} showCommits={this.showCommits} />
+                  </div>
+                ))}
+            </List>
+          )}
         </div>
       </Card>
     )
@@ -109,6 +117,7 @@ class ReposCard extends Component {
 ReposCard.propTypes = {
   userName: PropTypes.string.isRequired,
   repos: PropTypes.array,
+  reposLoading: PropTypes.bool.isRequired,
   apiRepos: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
