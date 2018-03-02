@@ -14,10 +14,8 @@ const reposQuery = userName => `
       totalCount
       edges {
         node {
-          id
           name
           description
-          url
           forkCount
           stargazers {
             totalCount
@@ -40,15 +38,19 @@ const reposQuery = userName => `
 const extractRepoInformation = _.compose(
   addRepos,
   _.sortBy(_.path('name')),
-  _.map(repo => ({
-    ..._.omit(['stargazers', 'issues', 'languages'], _.path('node', repo)),
-    starCount: _.path('node.stargazers.totalCount', repo),
-    issueCount: _.path('node.issues.totalCount', repo),
-    languages: _.sortBy(
-      _.identity,
-      _.map(_.path('node.name'), _.path('node.languages.edges', repo))
+  _.map(repo =>
+    _.merge(
+      {
+        starCount: _.path('node.stargazers.totalCount', repo),
+        issueCount: _.path('node.issues.totalCount', repo),
+        languages: _.sortBy(
+          _.identity,
+          _.map(_.path('node.name'), _.path('node.languages.edges', repo))
+        )
+      },
+      _.omit(['stargazers', 'issues', 'languages'], _.path('node', repo))
     )
-  })),
+  ),
   _.path('response.data.user.repositories.edges')
 )
 
