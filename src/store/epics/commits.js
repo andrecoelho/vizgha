@@ -21,8 +21,6 @@ const commitsQuery = (userName, repoName) => `
                 name
               }
               message
-              committedDate
-              authoredDate
               additions
               deletions
             }
