@@ -12,6 +12,10 @@
 
 .title {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+}
+
+.titleText {
+  flex: 1 1 auto;
+  text-align: center;
 }
