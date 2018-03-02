@@ -2,7 +2,6 @@ import { Observable } from 'rxjs/Observable'
 import _ from 'lodash/fp'
 import gqlRequest from './_gql-request'
 
-import 'rxjs/add/observable/if'
 import 'rxjs/add/observable/empty'
 import 'rxjs/add/operator/catch'
 
@@ -40,25 +39,14 @@ const normalizeCommits = _.compose(
   _.path('response.data.repository.defaultBranchRef.target.history.nodes')
 )
 
-const hasCommits = (repoName, repos) =>
-  _.compose(
-    _.has('commits'),
-    _.find(repo => repo.name === repoName)
-  )(repos)
-
 const commits = (actionStream, store) =>
   actionStream.ofType(API_COMMITS).switchMap(action =>
-    Observable.if(
-      () => !hasCommits(action.repoName, store.getState().repos),
-      gqlRequest(
-        store.getState().token,
-        commitsQuery(store.getState().userName, action.repoName)
-      )
-        .map(response =>
-          addCommits(action.repoName, normalizeCommits(response))
-        )
-        .catch(() => Observable.empty())
+    gqlRequest(
+      store.getState().token,
+      commitsQuery(store.getState().userName, action.repoName)
     )
+      .map(response => addCommits(action.repoName, normalizeCommits(response)))
+      .catch(() => Observable.empty())
   )
 
 export default commits

@@ -12,16 +12,13 @@ const Commits = props => (
   </div>
 )
 
-const mapStateToProps = (state, ownProps) => {
-  const repo = _.find(
-    repo => repo.name === ownProps.match.params.name,
-    state.repos
+const mapStateToProps = (state, ownProps) => ({
+  commits: _.propOr(
+    [],
+    'commits',
+    _.find(repo => repo.name === ownProps.match.params.name, state.repos)
   )
-
-  return {
-    commits: _.propOr([], 'commits', repo)
-  }
-}
+})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   apiCommits (userName, repoName) {
