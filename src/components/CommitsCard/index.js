@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Card, CardTitle } from 'material-ui/Card'
-import Divider from 'material-ui/Divider'
 import IconButton from 'material-ui/IconButton'
 import SvgBack from 'material-ui/svg-icons/image/navigate-before'
 import SvgToken from 'material-ui/svg-icons/communication/vpn-key'
@@ -51,9 +50,7 @@ class CommitsCard extends Component {
             </IconButton>
           </div>
 
-          <Divider />
-
-          <div>
+          <div styleName='histogram'>
             {this.props.commits.map(commit => (
               <div key={commit.oid}>{commit.message}</div>
             ))}
